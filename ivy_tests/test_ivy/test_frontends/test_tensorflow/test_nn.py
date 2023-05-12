@@ -1273,9 +1273,6 @@ def test_tensorflow_relu6(
 
   
 
-
-
-
 # pool
 @handle_frontend_test(
     fn_tree="tensorflow.nn.pool",
@@ -1293,20 +1290,22 @@ def test_tensorflow_pool(
     fn_tree,
     on_device,
 ):
-    input_dtype, x, ksize, strides, padding = x_k_s_p
+    input_dtype, x, pool_size, strides, padding = x_k_s_p
     data_format = data_format
     helpers.test_frontend_function(
         input_dtypes=input_dtype,
-        as_variable_flags=as_variable,
-        with_out=False,
-        num_positional_args=num_positional_args,
-        native_array_flags=native_array,
+        #as_variable_flags=as_variable,
+        #with_out=False,
+        #num_positional_args=num_positional_args,
+        #native_array_flags=native_array,
         frontend=frontend,
+        test_flags=test_flags,
         fn_tree=fn_tree,
         on_device=on_device,
         input=x[0],
-        ksize=ksize,
+        pool_size=pool_size,
+        #ksize=ksize,
         strides=strides,
         padding=padding,
-        data_format=data_format,
+        #data_format=data_format, #tensorflow.nn.pool does not have this argument
     )
