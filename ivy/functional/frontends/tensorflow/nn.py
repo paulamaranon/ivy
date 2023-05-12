@@ -481,3 +481,13 @@ def softmax(logits, axis=None, name=None):
 @to_ivy_arrays_and_back
 def relu6(features, name=None):
     return ivy.clip(features, 0, 6)
+
+@to_ivy_arrays_and_back
+def pool(input, ksize, strides, padding, pool_type='max'):
+    if pool_type == 'max':
+        return ivy.max_pool1d(input, ksize=ksize, strides=strides, padding=padding)
+    elif pool_type == 'avg':
+        return ivy.avg_pool1d(input, ksize=ksize, strides=strides, padding=padding)
+    else:
+        raise ValueError('Invalid pool type: {}'.format(pool_type))
+
